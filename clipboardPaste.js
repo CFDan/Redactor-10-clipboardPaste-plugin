@@ -95,7 +95,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 						/* For Chrome and Opera we need to create a fake image first to retain the current caret posisiont. For the life of me I can't get the caret position through the proxy */
 						e.stopPropagation();
 						var img = document.createElement('img');					
-						img.id = "clipboard-image-marker";
+						img.alt = "clipboard-image-marker";
 						img.setAttribute( "data-redactor-inserted-image" , true );
 
 						/* Get the current caret position, insert the fake image and set the caret after the new node */
@@ -114,7 +114,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 						} else {
 							/* Get rid of the fake image if we didn't have files */
 							this.progress.hide();
-							$( $.find('img#clipboard-image-marker') ).remove();							
+							$( $.find('img[alt="clipboard-image-marker"]') ).remove();							
 						}
 						
 						return true;
@@ -174,11 +174,11 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 					$.post( this.opts.clipboardUploadUrl, postData, $.proxy(function(data) {
 						var json = (typeof data === 'string' ? $.parseJSON(data) : data);
 
-						var image = $(this.$editor.find('img#clipboard-image-marker'));
+						var image = $(this.$editor.find('img[alt="clipboard-image-marker"]'));
 						
 						if (image.length) {							
 							image.attr('src',json.filelink);
-							image.removeAttr('id');
+							image.removeAttr('alt');
 						}
 
 						this.code.sync();
