@@ -49,6 +49,8 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 							        		// Otherwise make sure they're in P tags
 							        		$s.wrap("<p></p>");
 							        	}
+
+							        	this.code.sync();
 							        	
 							        	this.progress.hide();
 
@@ -57,8 +59,7 @@ if (!RedactorPlugins) var RedactorPlugins = {};
 									},this));
 										
 								}, this));
-								
-								this.code.sync();								
+																
 							}							
 
 						} , this ) , 500);
